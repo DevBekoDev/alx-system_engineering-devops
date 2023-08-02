@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -ltr -pma
+ls --foramt -pma
