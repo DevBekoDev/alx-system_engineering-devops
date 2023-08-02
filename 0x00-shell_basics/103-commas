@@ -1,2 +1,2 @@
 #!/bin/bash
-ls --foramt -pma
+ls --format=single-column -pma
