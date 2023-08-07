@@ -1,2 +1,2 @@
 #!/bin/bash
-sort | uniq -u > sorted_words
+sort | uniq -u 
