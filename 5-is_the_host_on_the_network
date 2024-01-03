@@ -1,0 +1,6 @@
+#!/bin/bash
+if ! [ "${1}" ];then
+	echo "Usage: $(basename "${BASH_SOURCE[@]}") {IP_ADDRESS}"
+else
+	ping ${1} -c 5
+fi
