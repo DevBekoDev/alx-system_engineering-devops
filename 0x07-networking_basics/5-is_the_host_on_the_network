@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# ping ip address
 if ! [ "${1}" ];then
 	echo "Usage: $(basename "${BASH_SOURCE[@]}") {IP_ADDRESS}"
 else
