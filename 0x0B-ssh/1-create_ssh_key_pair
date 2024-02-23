@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# craete ssh keys
+
+ssh-keygen -t rsa -f school -b 4096 -P betty
