@@ -1,5 +1,10 @@
-# installing flask
-package { 'flask':
-    ensure   => '2.1.0',
-    provider => 'pip3',
+#Installing flask
+
+exec {'pip3 install flask':
+require => Exec['python'],
+command => '/usr/bin/pip3 install flask==2.1.0'
+}
+
+exec {'Werkzeug':
+command => '/usr/bin/pip3 install Werkzeug==2.11'
 }
