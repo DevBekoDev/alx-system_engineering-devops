@@ -1,29 +1,24 @@
-# Setup new web server with nginx
+# configure a  web server with custom header
 
 exec { 'update':
-        command => '/usr/bin/apt-get update',
+  command  => 'sudo apt -y update',
+  provider => 'shell',
+  before   => Exec['nginx'],
 }
 
-package { 'nginx':
-	ensure => 'nginx-installed',
-	require => Exec['update']
+exec { 'nginx':
+  command  => 'sudo apt -y install nginx',
+  provider => 'shell',
+  before   => Exec['config'],
 }
 
-file {'/var/www/html/index.html':
-	content => 'Hello World!'
+exec { 'config':
+  command  => 'sudo sed -i s@"http {"@"http {\n\tadd_header X-Served-By \$HOSTNAME;"@g /etc/nginx/nginx.conf',
+  provider => 'shell',
+  before   => Exec['restart'],
 }
 
-exec {'redirect_me':
-	command => 'sed -i "24i\	rewrite ^/redirect_me https://th3-gr00t.tk/ permanent;" /etc/nginx/sites-available/default',
-	provider => 'shell'
-}
-
-exec {'HTTP header':
-	command => 'sed -i "25i\	add_header X-Served-By \$hostname;" /etc/nginx/sites-available/default',
-	provider => 'shell'
-}
-
-service {'nginx':
-	ensure => running,
-	require => Package['nginx']
+exec { 'restart':
+  command  => 'sudo service nginx restart',
+  provider => 'shell',
 }
