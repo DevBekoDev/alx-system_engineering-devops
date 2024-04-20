@@ -28,14 +28,13 @@ defaults
   timeout server 15s
   timeout http-request 10s
 
-frontend DevBekoDev-FrontEnd
+frontend clickviral-tech-frontend
     bind *:80
-    default_backend DevBekoDev-FrontEnd
 
-backend DevBekoDev-BackEnd
+backend
     balance roundrobin
     server 513870-web-01 52.91.178.111:80 check
-    server 513870-web-02 107.20.154.11980 check
+    server 513870-web-02 107.20.154.119:80 check
 "
 
 echo "$server_config" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
